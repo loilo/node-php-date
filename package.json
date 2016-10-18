@@ -1,0 +1,30 @@
+{
+  "author": {
+    "name": "Florian Reuschel"
+  },
+  "dependencies": {},
+  "description": "Formats a Date object with a formatter string",
+  "devDependencies": {},
+  "directories": {},
+  "dist": {
+    "shasum": "4a122e9d30602214455c55779fbfaf234254d550",
+    "tarball": "https://registry.npmjs.org/@loilo/format-date/-/format-date-1.0.0.tgz"
+  },
+  "keywords": [
+    "js",
+    "util",
+    "format",
+    "date"
+  ],
+  "repository": "loilo/node-php-date",
+  "license": "MIT",
+  "main": "formatDate.js",
+  "maintainers": [
+    {
+      "name": "Florian Reuschel",
+      "email": "florian@loilo.de"
+    }
+  ],
+  "name": "php-date",
+  "version": "1.0.0"
+}
