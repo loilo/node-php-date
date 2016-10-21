@@ -16,7 +16,7 @@ The signature looks kind of like this:
 
 So just use it mostly like in PHP:
 
-```
+```javascript
 const date = require('php-date')
 
 const releaseDate = new Date(2016, 9, 18)
@@ -29,7 +29,7 @@ The second argument is completely optional, like in PHP this will default to the
 
 You may also pass a `locale` parameter which has influence on the output of day and month names:
 
-```
+```javascript
 date('l', releaseDate, 'de') // Dienstag
 ```
 
@@ -39,7 +39,7 @@ If you want to use the current date you can just omit the `date` parameter.
 
 The locale defaults to `en`. English and German names are pre-included in the package but you can easily add your own. This would add German to the formatter if it wasn't already in there:
 
-```
+```javascript
 date.localizationData.de = {
   days: [ "Montag", "Dienstag", "Mittwoch", "Donnerstag", "Freitag", "Samstag", "Sonntag" ],
   daysShort: [ "Mo", "Di", "Mi", "Do", "Fr", "Sa", "So" ],
@@ -50,4 +50,4 @@ date.localizationData.de = {
 
 ## Timezone identifiers
 
-The only token not supported by `php-date` is the `e` which gives a timezone identifier in PHP. I felt that this would bloat the code a little too much.
+The only PHP date token not supported by this package is the `e` which would return a timezone identifier. I felt that this would bloat the code a little too much. Also I'm not even sure if that's reliably detectable.
