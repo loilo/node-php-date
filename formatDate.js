@@ -68,7 +68,8 @@ const formatDate = function(formatterString) {
     // Determine some helper data
     const trueModulo = (a, b) => (+a % (b = +b) + b) % b;
     const day = date.getDate();
-    const weekday = date.getDay() - 1;
+    const weekday = date.getDay();
+    const normalizedWeekday = trueModulo(weekday - 1, 7);
     const month = date.getMonth() + 1;
     const year = date.getFullYear();
     const hours = date.getHours();
@@ -95,10 +96,10 @@ const formatDate = function(formatterString) {
     // The patterns to make available
     const patterns = {
         d: () => leading(day),
-        D: () => localizedData.daysShort[weekday],
+        D: () => localizedData.daysShort[normalizedWeekday],
         j: () => day,
-        l: () => localizedData.days[weekday],
-        N: () => trueModulo((weekday - 1), 7) + 1,
+        l: () => localizedData.days[normalizedWeekday],
+        N: () => normalizedWeekday + 1,
         S: () => {
             var j = day % 10,
                 k = day % 100;
@@ -145,7 +146,7 @@ const formatDate = function(formatterString) {
         },
         Z: () => timezone * 60,
         c: function() { return `${this.Y()}-${this.m()}-${this.d()}T${this.H()}:${this.i()}:${this.s()}${this.P()}` },
-        r: function() { return `${localizationData.en.daysShort[weekday]}, ${this.j()} ${this.M()} ${this.Y()} ${this.H()}:${this.i()}:${this.s()} ${this.P()}` },
+        r: function() { return `${localizationData.en.daysShort[normalizedWeekday]}, ${this.j()} ${this.M()} ${this.Y()} ${this.H()}:${this.i()}:${this.s()} ${this.P()}` },
         U: () => Math.round(time / 1000),
     };
     
