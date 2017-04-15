@@ -6,8 +6,6 @@ This package aims to mimick the formatting of [PHP's date](http://php.net/manual
 
 `npm install php-date`
 
-Please note that this module makes pretty heavy use of ES2015 so you should at least have Node.js v4.0.0 installed.
-
 ## Usage
 
 The signature looks kind of like this:
