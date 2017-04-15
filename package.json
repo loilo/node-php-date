@@ -4,12 +4,15 @@
   },
   "dependencies": {},
   "description": "Formats a Date object with a formatter string",
-  "devDependencies": {},
-  "directories": {},
-  "dist": {
-    "shasum": "4a122e9d30602214455c55779fbfaf234254d550",
-    "tarball": "https://registry.npmjs.org/@loilo/format-date/-/format-date-1.0.0.tgz"
+  "devDependencies": {
+    "babel-cli": "^6.24.1",
+    "babel-preset-es2015": "^6.24.1"
   },
+  "scripts": {
+    "build": "babel src --presets es2015 -d dist",
+    "prepublish": "npm run build"
+  },
+  "directories": {},
   "keywords": [
     "js",
     "util",
@@ -18,7 +21,7 @@
   ],
   "repository": "loilo/node-php-date",
   "license": "MIT",
-  "main": "formatDate.js",
+  "main": "dist/index.js",
   "maintainers": [
     {
       "name": "Florian Reuschel",
