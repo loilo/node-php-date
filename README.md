@@ -1,6 +1,6 @@
 # php-date
 
-This package aims to mimick the formatting of [PHP's date](http://php.net/manual/en/function.date.php) function.
+This package aims to mimic the formatting of [PHP's date](http://php.net/manual/en/function.date.php) function.
 
 ## Installation
 
