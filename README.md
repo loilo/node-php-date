@@ -1,16 +1,20 @@
 # php-date
 
-This package aims to mimic the formatting of [PHP's date](http://php.net/manual/en/function.date.php) function.
+This package aims to mimic the formatting of [PHP's date](http://php.net/manual/en/function.date.php) function in JavaScript.
 
 ## Installation
+Install via npm:
 
-`npm install php-date`
+```bash
+npm install --save php-date
+```
 
 ## Usage
+The signature looks like this:
 
-The signature looks kind of like this:
-
-`date(formatterString, [date = new Date,] [locale = "en"])`
+```javascript
+{string} date ( formatterString [, date = new Date [, locale = "en" ]] )
+```
 
 So just use it mostly like in PHP:
 
@@ -23,7 +27,13 @@ date('d.m.Y', releaseDate) // 18.10.2016
 date('F jS Y', releaseDate) // October 18th 2016
 ```
 
-The second argument is completely optional, like in PHP this will default to the current time.
+Sometimes you want to format a given date for the UTC timezone. You can do so by using the `date.UTC` function, it has the same signature as the `date` function itself:
+
+```javascript
+date.UTC(...)
+```
+
+The second argument is completely optional, like in PHP this will default to the current point in time.
 
 You may also pass a `locale` parameter which has influence on the output of day and month names:
 
@@ -34,7 +44,6 @@ date('l', releaseDate, 'de') // Dienstag
 If you want to use the current date you can just omit the `date` parameter.
 
 ## Language data
-
 The locale defaults to `en`. English and German names are pre-included in the package but you can easily add your own. This would add German to the formatter if it wasn't already in there:
 
 ```javascript
@@ -47,5 +56,4 @@ date.localizationData.de = {
 ```
 
 ## Timezone identifiers
-
-The only PHP date token not supported by this package is the `e` which would return a timezone identifier. I felt that this would bloat the code a little too much. Also I'm not even sure if that's reliably detectable.
+The only PHP date token not supported by this package are timezones (tokens `e` and `T`) which would return a timezone identifier. I felt like that would bloat the code a little too much. Also I'm not even sure if that's reliably detectable.

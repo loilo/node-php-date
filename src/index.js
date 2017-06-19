@@ -32,63 +32,44 @@ const localizationData = {
  * To extend the native Date object (this is not recommended, think well before you do so!) add this after the definition:
  * Date.prototype.format = function(formatterString, locale = 'en') { return formatDate(formatterString, this, locale); }
  */
-const formatDate = function(formatterString) {
-    const args = Array.prototype.slice.call(arguments, 1)
-    let date, locale
-
-    // Use defaults for `date` and `locale`
-    switch (args.length) {
-        case 0:
-            date = new Date
-            locale = 'en'
-            break;
-
-        case 1:
-            if (typeof args[0] === 'string') {
-                locale = args[0]
-                date = new Date
-            } else {
-                locale = 'en'
-                date = args[0]
-            }
-            break;
-
-        case 2:
-            date = args[0]
-            locale = args[1]
-            break;
-    }
-
+const formatDateBase = function formatDateBase ({
+    formatterString,
+    utc = false,
+    date = new Date,
+    locale = 'en'
+}) {
     // Determine localization data
     if (typeof localizationData[locale] !== 'object')
         throw `No language data for "${locale}"`;
 
     const localizedData = localizationData[locale];
     
+    const get = (date, what) => date[`get${ utc ? 'UTC' : '' }${what}`]()
+
     // Determine some helper data
-    const trueModulo = (a, b) => (+a % (b = +b) + b) % b;
-    const day = date.getDate();
-    const weekday = date.getDay();
-    const normalizedWeekday = trueModulo(weekday - 1, 7);
-    const month = date.getMonth() + 1;
-    const year = date.getFullYear();
-    const hours = date.getHours();
-    const minutes = date.getMinutes();
-    const seconds = date.getSeconds();
-    const time = date.getTime();
-    const timezone = date.getTimezoneOffset();
-    const leading = str => String(str).length === 1 ? "0" + str : str;
+    const trueModulo = (a, b) => (+a % (b = +b) + b) % b
+    const day = get(date, 'Date')
+    const weekday = get(date, 'Day')
+    const normalizedWeekday = trueModulo(weekday - 1, 7)
+    const month = get(date, 'Month') + 1
+    const year = get(date, 'FullYear')
+    const hours = get(date, 'Hours')
+    const minutes = get(date, 'Minutes')
+    const seconds = get(date, 'Seconds')
+    const time = date.getTime()
+    const timezone = date.getTimezoneOffset()
+    const leading = str => String(str).length === 1 ? "0" + str : str
     const calcISOWeek = () => {
         // Kudos to Stackoverflow: http://stackoverflow.com/a/6117889/2048874
         const d = new Date(+date);
         d.setHours(0, 0, 0);
-        d.setDate(d.getDate() + 4 - (d.getDay() || 7));
+        d.setDate(get(d, 'Date') + 4 - (get(d, 'Day') || 7));
 
-        const year = new Date(d.getFullYear(), 0, 1);
+        const year = new Date(get(d, 'FullYear'), 0, 1);
         const week = Math.ceil((( (d - year) / 86400000) + 1)/7);
 
         return {
-            year: year.getFullYear(),
+            year: get(year, 'FullYear'),
             week: week
         }
     }
@@ -121,7 +102,7 @@ const formatDate = function(formatterString) {
         m: () => leading(month),
         M: () => localizedData.monthsShort[month - 1],
         n: () => month,
-        t: () => new Date(year, month, 0).getDate(),
+        t: () => (new Date(year, month, 0)).getDate(),
         L: () => ((new Date(year + 1, 0, 1).getTime() - new Date(year, 0, 1).getTime()) / 86400000) === 366,
         o: () => calcISOWeek().year,
         Y: () => year,
@@ -156,6 +137,57 @@ const formatDate = function(formatterString) {
         match => patterns[match]()
     );
 };
+
+const supplementArgs = function supplementArgs (args) {
+    let date, locale
+
+    // Use defaults for `date` and `locale`
+    switch (args.length) {
+        case 0:
+            date = new Date
+            locale = 'en'
+            break;
+
+        case 1:
+            if (typeof args[0] === 'string') {
+                locale = args[0]
+                date = new Date
+            } else {
+                locale = 'en'
+                date = args[0]
+            }
+            break;
+
+        case 2:
+            date = args[0]
+            locale = args[1]
+            break;
+    }
+
+    return { date, locale }
+}
+
+const formatDate = function formatDate (formatterString) {
+    const { date, locale } = supplementArgs(Array.prototype.slice.call(arguments, 1))
+
+    return formatDateBase({
+        formatterString,
+        locale,
+        date,
+        utc: false
+    })
+}
+
+formatDate.UTC = function formatDateUTC (formatterString) {
+    const { date, locale } = supplementArgs(Array.prototype.slice.call(arguments, 1))
+
+    return formatDateBase({
+        formatterString,
+        locale,
+        date,
+        utc: true
+    })
+}
 
 /**
  * Append localization data to the function object
