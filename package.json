@@ -11,7 +11,7 @@
   },
   "scripts": {
     "build": "babel src --presets es2015 -d dist",
-    "prepublish": "npm run test && npm run build",
+    "prepublishOnly": "npm run test && npm run build",
     "test": "mocha"
   },
   "directories": {},
