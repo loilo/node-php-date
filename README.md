@@ -1,5 +1,7 @@
 # php-date
 
+[![Build Status](https://travis-ci.org/Loilo/node-sass-yaml-importer.svg?branch=master)](https://travis-ci.org/Loilo/node-sass-yaml-importer)
+
 This package aims to mimic the formatting of [PHP's date](http://php.net/manual/en/function.date.php) function in JavaScript.
 
 ## Installation
