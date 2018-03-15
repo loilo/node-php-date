@@ -1,8 +1,8 @@
 # php-date
 
 [![Greenkeeper badge](https://badges.greenkeeper.io/Loilo/node-php-date.svg)](https://greenkeeper.io/)
-
-[![Build Status](https://travis-ci.org/Loilo/node-sass-yaml-importer.svg?branch=master)](https://travis-ci.org/Loilo/node-sass-yaml-importer)
+[![Build Status](https://travis-ci.org/Loilo/node-php-date.svg?branch=master)](https://travis-ci.org/Loilo/node-php-date)
+[![npm](https://img.shields.io/npm/v/php-date.svg)](https://www.npmjs.com/package/php-date)
 
 This package aims to mimic the formatting of [PHP's date](http://php.net/manual/en/function.date.php) function in JavaScript.
 
