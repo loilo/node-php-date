@@ -17,4 +17,4 @@ test_script:
   # run tests
   - npm test
 
-build: off
+build: false
