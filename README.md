@@ -16,8 +16,8 @@ npm install --save php-date
 ## Usage
 The signature looks like this:
 
-```javascript
-{string} date ( formatterString [, date = new Date [, locale = "en" ]] )
+```typescript
+date (formatter: string, date: Date = new Date, locale: string = "en"): string
 ```
 
 So just use it mostly like in PHP:
