@@ -10,7 +10,7 @@
     "mocha": "^6.0.0"
   },
   "scripts": {
-    "build": "babel src --presets es2015 -d dist",
+    "build": "babel src --presets es2015 -d dist && cp src/index.d.ts dist",
     "prepublishOnly": "npm run test && npm run build",
     "test": "mocha test.js"
   },
