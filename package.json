@@ -1,38 +1,38 @@
 {
+  "name": "php-date",
+  "version": "2.1.2",
+  "description": "Formats a Date object with a formatter string",
+  "keywords": [
+    "date",
+    "format",
+    "js",
+    "util"
+  ],
+  "repository": "loilo/node-php-date",
+  "license": "MIT",
   "author": {
     "name": "Florian Reuschel"
   },
-  "dependencies": {},
-  "description": "Formats a Date object with a formatter string",
-  "devDependencies": {
-    "babel-cli": "^6.24.1",
-    "babel-preset-es2015": "^6.24.1",
-    "mocha": "^6.0.0"
-  },
+  "files": [
+    "dist"
+  ],
+  "main": "dist/index.js",
+  "directories": {},
   "scripts": {
     "build": "babel src --presets es2015 -d dist && cp src/index.d.ts dist",
     "prepublishOnly": "npm run test && npm run build",
     "test": "mocha test.js"
   },
-  "files": [
-    "dist"
-  ],
-  "directories": {},
-  "keywords": [
-    "js",
-    "util",
-    "format",
-    "date"
-  ],
-  "repository": "loilo/node-php-date",
-  "license": "MIT",
-  "main": "dist/index.js",
+  "dependencies": {},
+  "devDependencies": {
+    "babel-cli": "^6.24.1",
+    "babel-preset-es2015": "^6.24.1",
+    "mocha": "^6.0.0"
+  },
   "maintainers": [
     {
       "name": "Florian Reuschel",
       "email": "florian@loilo.de"
     }
-  ],
-  "name": "php-date",
-  "version": "2.1.2"
+  ]
 }
