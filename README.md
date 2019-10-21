@@ -72,6 +72,6 @@ date.localizationData.de = {
   monthsShort: [ "Jan", "Feb", "Mär", "Apr", "Mai", "Jun", "Jul", "Aug", "Sep", "Okt", "Nov", "Dez" ]
 }
 ```
+### Timezone Identifiers
 
-## Timezone identifiers
 The only PHP date tokens not supported by this package are timezones (tokens `e` and `T`) which would return timezone identifiers. I felt like that would bloat the code a little too much with the fallbacks necessary for older browsers.
