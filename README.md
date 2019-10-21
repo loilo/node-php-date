@@ -60,4 +60,4 @@ date.localizationData.de = {
 ```
 
 ## Timezone identifiers
-The only PHP date token not supported by this package are timezones (tokens `e` and `T`) which would return a timezone identifier. I felt like that would bloat the code a little too much. Also I'm not even sure if that's reliably detectable.
+The only PHP date token not supported by this package are timezones (tokens `e` and `T`) which would return a timezone identifier. I felt like that would bloat the code a little too much with the fallbacks necessary for older browsers.
