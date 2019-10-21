@@ -126,7 +126,7 @@ const formatDateBase = function formatDateBase({
   const seconds = get(date, 'Seconds')
   const milliseconds = get(date, 'Milliseconds')
   const time = date.getTime()
-  const timezone = date.getTimezoneOffset()
+  const timezone = utc ? 0 : date.getTimezoneOffset()
   const leading = str => (String(str).length === 1 ? '0' + str : str)
   const calcISOWeek = () => {
     // Kudos to Stackoverflow: http://stackoverflow.com/a/6117889/2048874
