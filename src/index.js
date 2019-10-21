@@ -152,6 +152,17 @@ const formatDateBase = function formatDateBase({
 
   // The patterns to make available
   const patterns = {
+    B: () => {
+      return String(
+        Math.floor(
+          ((date.getUTCSeconds() / 3600 +
+            date.getUTCMinutes() / 60 +
+            ((date.getUTCHours() + 1) % 24)) *
+            1000) /
+            24
+        )
+      )
+    },
     d: () => leading(day),
     D: () => localizedData.daysShort[normalizedWeekday],
     j: () => day,
