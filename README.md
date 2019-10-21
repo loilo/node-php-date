@@ -13,6 +13,12 @@ Install via npm:
 npm install --save php-date
 ```
 
+Or use in the browser via [unpkg](https://unpkg.com) (using the global `phpDate` variable):
+
+```html
+<script src="https://unpkg.com/php-date"></script>
+```
+
 ## Usage
 The signature looks like this:
 
