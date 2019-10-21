@@ -176,10 +176,12 @@ const formatDateBase = function formatDateBase({
     M: () => localizedData.monthsShort[month - 1],
     n: () => month,
     t: () => new Date(year, month, 0).getDate(),
-    L: () =>
-      (new Date(year + 1, 0, 1).getTime() - new Date(year, 0, 1).getTime()) /
-        86400000 ===
-      366,
+    L: () => {
+      const checkDate = new Date(date.getTime())
+      checkDate.setMonth(1)
+      checkDate.setDate(29)
+      return checkDate.getDate() === 29 ? '1' : '0'
+    },
     o: () => calcISOWeek().year,
     Y: () => year,
     y: () => String(year).substr(2),
