@@ -112,6 +112,8 @@ const formatDateBase = function formatDateBase({
 
   const localizedData = localizationData[locale]
 
+  const set = (date, what, ...args) =>
+    date[`set${utc ? 'UTC' : ''}${what}`](...args)
   const get = (date, what) => date[`get${utc ? 'UTC' : ''}${what}`]()
 
   // Determine some helper data
@@ -131,10 +133,15 @@ const formatDateBase = function formatDateBase({
   const calcISOWeek = () => {
     // Kudos to Stackoverflow: http://stackoverflow.com/a/6117889/2048874
     const d = new Date(+date)
-    d.setHours(0, 0, 0)
-    d.setDate(get(d, 'Date') + 4 - (get(d, 'Day') || 7))
+    set(d, 'Hours', 0, 0, 0)
+    set(d, 'Date', get(d, 'Date') + 4 - (get(d, 'Day') || 7))
 
-    const year = new Date(get(d, 'FullYear'), 0, 1)
+    let dateArgs = [get(d, 'FullYear'), 0, 1]
+    if (utc) {
+      dateArgs = [Date.UTC(...dateArgs)]
+    }
+
+    const year = new Date(...dateArgs)
     const week = Math.ceil(((d - year) / 86400000 + 1) / 7)
 
     return {
