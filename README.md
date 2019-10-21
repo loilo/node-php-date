@@ -6,6 +6,11 @@
 
 This package aims to mimic the formatting of [PHP's date](http://php.net/manual/en/function.date.php) function in JavaScript.
 
+- [Almost all](#timezone-identifiers) tokens are supported
+- Tiny (1.2KB minified & gzipped)
+- Type annotations included
+- Works in all modern browsers, IE11 and Node.js
+
 ## Installation
 Install via npm:
 
