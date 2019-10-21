@@ -26,6 +26,18 @@ describe('unit tests', () => {
 
     it("should correctly format the 'S' token", () => {
       expect(format('S', date)).toBe('th')
+
+      const stDate = new Date(+date)
+      stDate.setDate(1)
+      expect(format('S', stDate)).toBe('st')
+
+      const ndDate = new Date(+date)
+      ndDate.setDate(2)
+      expect(format('S', ndDate)).toBe('nd')
+
+      const rdDate = new Date(+date)
+      rdDate.setDate(3)
+      expect(format('S', rdDate)).toBe('rd')
     })
 
     it("should correctly format the 'w' token", () => {
