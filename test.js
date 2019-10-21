@@ -1,4 +1,4 @@
-const format = require('./src/index')
+const format = require('./src/date')
 
 const date = new Date('2005-07-14T22:30:41+02:00')
 

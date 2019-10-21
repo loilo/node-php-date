@@ -16,18 +16,22 @@
   "files": [
     "dist"
   ],
-  "main": "dist/index.js",
+  "source": "src/date.js",
+  "main": "dist/date.js",
+  "umd:main": "dist/date.umd.js",
+  "unpkg": "dist/date.umd.js",
+  "jsdelivr": "dist/date.umd.js",
   "directories": {},
   "scripts": {
-    "build": "babel src --presets es2015 -d dist && cp src/index.d.ts dist",
+    "build": "del dist && microbundle -f cjs,umd && cp src/date.d.ts dist",
     "prepublishOnly": "npm run test && npm run build",
     "test": "jest test.js"
   },
   "dependencies": {},
   "devDependencies": {
-    "babel-cli": "^6.24.1",
-    "babel-preset-es2015": "^6.24.1",
-    "jest": "^24.9.0"
+    "del-cli": "^3.0.0",
+    "jest": "^24.9.0",
+    "microbundle": "^0.11.0"
   },
   "maintainers": [
     {
