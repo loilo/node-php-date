@@ -20,9 +20,9 @@ describe('integration tests', () => {
     expect(format.UTC('j, n, Y', date)).toBe('14, 7, 2005')
     expect(format.UTC('Ymd', date)).toBe('20050714')
     expect(format.UTC('h-i-s, j-m-y, it is w Day', date)).toBe(
-      '10-30-41, 14-07-05, 3031 3041 4 Thupm05'
+      '08-30-41, 14-07-05, 3031 3041 4 Thupm05'
     )
-    expect(format.UTC('D M j G:i:s Y', date)).toBe('Thu Jul 14 22:30:41 2005')
-    expect(format.UTC('H:i:s', date)).toBe('22:30:41')
+    expect(format.UTC('D M j G:i:s Y', date)).toBe('Thu Jul 14 20:30:41 2005')
+    expect(format.UTC('H:i:s', date)).toBe('20:30:41')
   })
 })
