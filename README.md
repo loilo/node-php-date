@@ -25,15 +25,16 @@ Or use in the browser via [unpkg](https://unpkg.com) (using the global `phpDate`
 ```
 
 ## Usage
+
 The signature looks like this:
 
-```typescript
-date (formatter: string, date: Date = new Date, locale: string = "en"): string
+```ts
+date (formatter: string, date: Date = new Date): string
 ```
 
 So just use it mostly like in PHP:
 
-```javascript
+```js
 const date = require('php-date')
 
 const releaseDate = new Date(2016, 9, 18)
@@ -44,7 +45,7 @@ date('F jS Y', releaseDate) // October 18th 2016
 
 Sometimes you want to format a given date for the UTC timezone. You can do so by using the `date.UTC` function, it has the same signature as the `date` function itself:
 
-```javascript
+```js
 date.UTC(...)
 ```
 
