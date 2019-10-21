@@ -1,117 +1,58 @@
 'use strict'
 
-/**
- * Localized days and months
- */
-const localizationData = {
-  en: {
-    days: [
-      'Monday',
-      'Tuesday',
-      'Wednesday',
-      'Thursday',
-      'Friday',
-      'Saturday',
-      'Sunday'
-    ],
-    daysShort: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
-    months: [
-      'January',
-      'February',
-      'March',
-      'April',
-      'May',
-      'June',
-      'July',
-      'August',
-      'September',
-      'October',
-      'November',
-      'December'
-    ],
-    monthsShort: [
-      'Jan',
-      'Feb',
-      'Mar',
-      'Apr',
-      'May',
-      'Jun',
-      'Jul',
-      'Aug',
-      'Sep',
-      'Oct',
-      'Nov',
-      'Dec'
-    ]
-  },
-  de: {
-    days: [
-      'Montag',
-      'Dienstag',
-      'Mittwoch',
-      'Donnerstag',
-      'Freitag',
-      'Samstag',
-      'Sonntag'
-    ],
-    daysShort: ['Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa', 'So'],
-    months: [
-      'Januar',
-      'Februar',
-      'März',
-      'April',
-      'Mai',
-      'Juni',
-      'Juli',
-      'August',
-      'September',
-      'Oktober',
-      'November',
-      'Dezember'
-    ],
-    monthsShort: [
-      'Jan',
-      'Feb',
-      'Mär',
-      'Apr',
-      'Mai',
-      'Jun',
-      'Jul',
-      'Aug',
-      'Sep',
-      'Okt',
-      'Nov',
-      'Dez'
-    ]
-  }
-}
+const days = [
+  'Monday',
+  'Tuesday',
+  'Wednesday',
+  'Thursday',
+  'Friday',
+  'Saturday',
+  'Sunday'
+]
+const daysShort = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+const months = [
+  'January',
+  'February',
+  'March',
+  'April',
+  'May',
+  'June',
+  'July',
+  'August',
+  'September',
+  'October',
+  'November',
+  'December'
+]
+const monthsShort = [
+  'Jan',
+  'Feb',
+  'Mar',
+  'Apr',
+  'May',
+  'Jun',
+  'Jul',
+  'Aug',
+  'Sep',
+  'Oct',
+  'Nov',
+  'Dec'
+]
 
 /**
  * Formats a Date object with a formatter string
  * Mostly matches the behaviour of PHPs date()
  * @see {@link http://php.net/manual/en/function.date.php|PHP date() docs}
  *
- * @param {string} formatterString - The formatter string
- * @param {Date} [date=new Date] - The date to format
- * @param {string} [locale=en] - The localization code
+ * @param {string} formatterString The formatter string
+ * @param {Date}   date            The date to format
  *
- * @returns {string} - The formatted date string
+ * @returns {string} The formatted date string
  *
  * To extend the native Date object (this is not recommended, think well before you do so!) add this after the definition:
- * Date.prototype.format = function(formatterString, locale = 'en') { return formatDate(formatterString, this, locale); }
+ * Date.prototype.format = function(formatterString) { return formatDate(formatterString, this); }
  */
-const formatDateBase = function formatDateBase({
-  formatterString,
-  utc = false,
-  date = new Date(),
-  locale = 'en'
-}) {
-  // Determine localization data
-  if (typeof localizationData[locale] !== 'object')
-    throw `No language data for "${locale}"`
-
-  const localizedData = localizationData[locale]
-
+function formatDateBase(formatterString, date, utc) {
   const set = (date, what, ...args) =>
     date[`set${utc ? 'UTC' : ''}${what}`](...args)
   const get = (date, what) => date[`get${utc ? 'UTC' : ''}${what}`]()
@@ -164,9 +105,9 @@ const formatDateBase = function formatDateBase({
       )
     },
     d: () => leading(day),
-    D: () => localizedData.daysShort[normalizedWeekday],
+    D: () => daysShort[normalizedWeekday],
     j: () => day,
-    l: () => localizedData.days[normalizedWeekday],
+    l: () => days[normalizedWeekday],
     N: () => normalizedWeekday + 1,
     S: () => {
       var j = day % 10,
@@ -189,9 +130,9 @@ const formatDateBase = function formatDateBase({
     w: () => weekday,
     z: () => Math.floor((time - new Date(year, 0, 1).getTime()) / 86400000),
     W: () => calcISOWeek().week,
-    F: () => localizedData.months[month - 1],
+    F: () => months[month - 1],
     m: () => leading(month),
-    M: () => localizedData.monthsShort[month - 1],
+    M: () => monthsShort[month - 1],
     n: () => month,
     t: () => new Date(year, month, 0).getDate(),
     L: () => {
@@ -234,7 +175,7 @@ const formatDateBase = function formatDateBase({
     },
     r: function() {
       return `${
-        localizationData.en.daysShort[normalizedWeekday]
+        daysShort[normalizedWeekday]
       }, ${this.j()} ${this.M()} ${this.Y()} ${this.H()}:${this.i()}:${this.s()} ${this.O()}`
     },
     U: () => Math.round(time / 1000)
@@ -247,64 +188,12 @@ const formatDateBase = function formatDateBase({
   )
 }
 
-const supplementArgs = function supplementArgs(args) {
-  let date, locale
-
-  // Use defaults for `date` and `locale`
-  switch (args.length) {
-    case 0:
-      date = new Date()
-      locale = 'en'
-      break
-
-    case 1:
-      if (typeof args[0] === 'string') {
-        locale = args[0]
-        date = new Date()
-      } else {
-        locale = 'en'
-        date = args[0]
-      }
-      break
-
-    case 2:
-      date = args[0]
-      locale = args[1]
-      break
-  }
-
-  return { date, locale }
+const formatDate = function formatDate(formatterString, date = new Date()) {
+  return formatDateBase(formatterString, date, false)
 }
 
-const formatDate = function formatDate(formatterString) {
-  const { date, locale } = supplementArgs(
-    Array.prototype.slice.call(arguments, 1)
-  )
-
-  return formatDateBase({
-    formatterString,
-    locale,
-    date,
-    utc: false
-  })
+formatDate.UTC = function formatDateUTC(formatterString, date = new Date()) {
+  return formatDateBase(formatterString, date, true)
 }
-
-formatDate.UTC = function formatDateUTC(formatterString) {
-  const { date, locale } = supplementArgs(
-    Array.prototype.slice.call(arguments, 1)
-  )
-
-  return formatDateBase({
-    formatterString,
-    locale,
-    date,
-    utc: true
-  })
-}
-
-/**
- * Append localization data to the function object
- */
-formatDate.localizationData = localizationData
 
 module.exports = formatDate
