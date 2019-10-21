@@ -217,14 +217,14 @@ const formatDateBase = function formatDateBase({
       const offset = timezone / -60
       return (offset < 0 ? '-' : '+') + leading(offset) + ':00'
     },
-    Z: () => timezone * 60,
+    Z: () => String(-(timezone * 60)),
     c: function() {
       return `${this.Y()}-${this.m()}-${this.d()}T${this.H()}:${this.i()}:${this.s()}${this.P()}`
     },
     r: function() {
       return `${
         localizationData.en.daysShort[normalizedWeekday]
-      }, ${this.j()} ${this.M()} ${this.Y()} ${this.H()}:${this.i()}:${this.s()} ${this.P()}`
+      }, ${this.j()} ${this.M()} ${this.Y()} ${this.H()}:${this.i()}:${this.s()} ${this.O()}`
     },
     U: () => Math.round(time / 1000)
   }
