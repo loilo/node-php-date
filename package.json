@@ -21,7 +21,7 @@
   "scripts": {
     "build": "babel src --presets es2015 -d dist && cp src/index.d.ts dist",
     "prepublishOnly": "npm run test && npm run build",
-    "test": "mocha test.js"
+    "test": "jest test.js"
   },
   "dependencies": {},
   "devDependencies": {
