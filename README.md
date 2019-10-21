@@ -12,6 +12,7 @@ This package aims to mimic the formatting of [PHP's date](http://php.net/manual/
 - Works in all modern browsers, IE11 and Node.js
 
 ## Installation
+
 Install via npm:
 
 ```bash
@@ -49,29 +50,8 @@ Sometimes you want to format a given date for the UTC timezone. You can do so by
 date.UTC(...)
 ```
 
-The second argument is completely optional, like in PHP this will default to the current point in time.
+The second argument is completely optional; like in PHP this will default to the current point in time.
 
-You may also pass a `locale` parameter which has influence on the output of day and month names:
-
-```javascript
-date('l', releaseDate, 'de') // Dienstag
-```
-
-If you want to use the current date you can just omit the `date` parameter.
-
-## Language data
-The locale defaults to `en`. English and German names are pre-included in the package but you can easily add your own. This would add German to the formatter if it wasn't already in there:
-
-> **Note:** This is an *extremely* rudimentary and unreliable way to apply internationalization to your dates. The [`Intl.DateTimeFormat` API](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/DateTimeFormat) would be the way to go here, but this would introduce a breaking change since support for older browsers would have to be dropped.
-
-```javascript
-date.localizationData.de = {
-  days: [ "Montag", "Dienstag", "Mittwoch", "Donnerstag", "Freitag", "Samstag", "Sonntag" ],
-  daysShort: [ "Mo", "Di", "Mi", "Do", "Fr", "Sa", "So" ],
-  months: [ "Januar", "Februar", "März", "April", "Mai", "Juni", "Juli", "August", "September", "Oktober", "November", "Dezember" ],
-  monthsShort: [ "Jan", "Feb", "Mär", "Apr", "Mai", "Jun", "Jul", "Aug", "Sep", "Okt", "Nov", "Dez" ]
-}
-```
 ### Timezone Identifiers
 
 The only PHP date tokens not supported by this package are timezones (tokens `e` and `T`) which would return timezone identifiers. I felt like that would bloat the code a little too much with the fallbacks necessary for older browsers.
