@@ -1,8 +1,8 @@
 const format = require('./src/index')
 
+const date = new Date('2005-07-14T22:30:41+02:00')
 describe('integration tests', () => {
   it('should correctly format local dates', () => {
-    const date = new Date(2005, 6, 14, 22, 30, 41)
     expect(format('F j, Y, g:i a', date)).toBe('July 14, 2005, 10:30 pm')
     expect(format('m.d.y', date)).toBe('07.14.05')
     expect(format('j, n, Y', date)).toBe('14, 7, 2005')
@@ -15,11 +15,7 @@ describe('integration tests', () => {
   })
 
   it('should correctly format UTC dates', () => {
-    const localDate = new Date(2005, 6, 14, 22, 30, 41)
-    const date = new Date(
-      localDate.getTime() - localDate.getTimezoneOffset() * 60 * 1000
-    )
-    expect(format.UTC('F j, Y, g:i a', date)).toBe('July 14, 2005, 10:30 pm')
+    expect(format.UTC('F j, Y, g:i a', date)).toBe('July 14, 2005, 8:30 pm')
     expect(format.UTC('m.d.y', date)).toBe('07.14.05')
     expect(format.UTC('j, n, Y', date)).toBe('14, 7, 2005')
     expect(format.UTC('Ymd', date)).toBe('20050714')
