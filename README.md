@@ -50,6 +50,8 @@ If you want to use the current date you can just omit the `date` parameter.
 ## Language data
 The locale defaults to `en`. English and German names are pre-included in the package but you can easily add your own. This would add German to the formatter if it wasn't already in there:
 
+> **Note:** This is an *extremely* rudimentary and unreliable way to apply internationalization to your dates. The [`Intl.DateTimeFormat` API](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/DateTimeFormat) would be the way to go here, but this would introduce a breaking change since support for older browsers would have to be dropped.
+
 ```javascript
 date.localizationData.de = {
   days: [ "Montag", "Dienstag", "Mittwoch", "Donnerstag", "Freitag", "Samstag", "Sonntag" ],
