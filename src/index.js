@@ -56,6 +56,7 @@ const formatDateBase = function formatDateBase ({
     const hours = get(date, 'Hours')
     const minutes = get(date, 'Minutes')
     const seconds = get(date, 'Seconds')
+    const milliseconds = get(date, 'Milliseconds')
     const time = date.getTime()
     const timezone = date.getTimezoneOffset()
     const leading = str => String(str).length === 1 ? "0" + str : str
@@ -94,6 +95,10 @@ const formatDateBase = function formatDateBase ({
                 return 'rd';
             }
             return 'th';
+        },
+        v: () => {
+            const msString = String(milliseconds)
+            return '0'.repeat(3 - msString.length) + msString
         },
         w: () => weekday,
         z: () => Math.floor((time - new Date(year, 0, 1).getTime()) / 86400000),
