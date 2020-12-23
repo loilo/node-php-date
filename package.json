@@ -31,7 +31,7 @@
   "devDependencies": {
     "del-cli": "^3.0.0",
     "jest": "^24.9.0",
-    "microbundle": "^0.12.0"
+    "microbundle": "^0.13.0"
   },
   "maintainers": [
     {
