@@ -1,7 +1,6 @@
 # php-date
 
-[![Test status on Travis](https://badgen.net/travis/loilo/node-php-date?label=Linux&icon=travis)](https://travis-ci.org/loilo/node-php-date)
-[![Test status on AppVeyor](https://badgen.net/appveyor/ci/loilo/node-php-date?label=Windows&icon=appveyor)](https://ci.appveyor.com/project/loilo/node-php-date)
+[![Tests](https://badgen.net/github/checks/loilo/node-php-date/master)](https://github.com/loilo/node-php-date/actions)
 [![Version on npm](https://badgen.net/npm/v/php-date)](https://www.npmjs.com/package/php-date)
 
 This package aims to mimic the formatting of [PHP's date](http://php.net/manual/en/function.date.php) function in JavaScript.
