@@ -29,7 +29,7 @@
   },
   "dependencies": {},
   "devDependencies": {
-    "del-cli": "^3.0.0",
+    "del-cli": "^4.0.0",
     "jest": "^27.0.1",
     "microbundle": "^0.13.0"
   },
