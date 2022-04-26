@@ -1,6 +1,6 @@
 {
   "name": "php-date",
-  "version": "3.0.1",
+  "version": "4.0.0",
   "description": "Formats a Date object with a formatter string",
   "keywords": [
     "date",
