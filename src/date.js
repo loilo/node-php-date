@@ -182,10 +182,17 @@ function formatDateBase(formatterString, date, utc) {
   }
 
   // Return the formatter string with replaced entities
-  return formatterString.replace(
-    new RegExp('(' + Object.keys(patterns).join('|') + ')', 'g'),
-    match => patterns[match]()
-  )
+  return formatterString
+    .replace(
+      new RegExp(
+        '(?<!([^\\\\]|^)\\\\(\\\\\\\\)*)[' +
+          Object.keys(patterns).join('') +
+          ']',
+        'g'
+      ),
+      match => patterns[match]()
+    )
+    .replace(/\\(.)/gm, '$1')
 }
 
 const formatDate = function formatDate(formatterString, date = new Date()) {

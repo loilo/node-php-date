@@ -309,6 +309,13 @@ describe('unit tests', () => {
 })
 
 describe('integration tests', () => {
+  it('should respect escape characters', () => {
+    expect(format('d.m.\\Y', date)).toBe('14.07.Y')
+    expect(format('d.m.\\\\Y', date)).toBe('14.07.\\2005')
+    expect(format('d.m.\\\\\\Y', date)).toBe('14.07.\\Y')
+    expect(format('\\.\\\\', date)).toBe('.\\')
+  })
+
   it('should correctly format local dates', () => {
     expect(format('F j, Y, g:i a', date)).toBe('July 14, 2005, 10:30 pm')
     expect(format('m.d.y', date)).toBe('07.14.05')
